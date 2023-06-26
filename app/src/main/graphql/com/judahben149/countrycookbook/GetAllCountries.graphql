@@ -1,0 +1,11 @@
+query GetAllCountries($continentCode: ID!) {
+    continent(code: $continentCode) {
+        code
+        name
+        countries {
+            code
+            name
+            emoji
+        }
+    }
+}
