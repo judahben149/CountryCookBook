@@ -1,5 +1,8 @@
 package com.judahben149.countrycookbook.domain.model
 
-//data class Continent(
-//
-//)
+import com.judahben149.type.Continent
+
+data class Continent(
+    val id: String = "",
+    val name: String = ""
+)
