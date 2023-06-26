@@ -10,19 +10,20 @@ import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.apollographql.apollo3.ApolloClient
 import com.judahben149.GetAllContinentsQuery
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        lifecycleScope.launch {
-            val response = apolloClient.query(GetAllContinentsQuery()).execute()
-            Log.d("TAG", "Success ${response.data}")
-
-            findViewById<TextView>(R.id.tv_countries).text = response.data.toString()
-        }
+//
+//        lifecycleScope.launch {
+//            val response = apolloClient.query(GetAllContinentsQuery()).execute()
+//            Log.d("TAG", "Success ${response.data}")
+//
+//        }
     }
 }
