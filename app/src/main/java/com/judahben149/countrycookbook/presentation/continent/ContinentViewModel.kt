@@ -1,4 +1,4 @@
-package com.judahben149.countrycookbook
+package com.judahben149.countrycookbook.presentation.continent
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
