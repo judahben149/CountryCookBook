@@ -7,19 +7,21 @@ import androidx.recyclerview.widget.ListAdapter
 import com.judahben149.countrycookbook.databinding.ItemRvContinentBinding
 import com.judahben149.countrycookbook.domain.model.Continent
 
-class ContinentAdapter: ListAdapter<Continent, ContinentViewHolder>(ContinentDiffer()) {
+class ContinentAdapter(private val onclick:(continentCode: String) -> Unit): ListAdapter<Continent, ContinentViewHolder>(ContinentDiffer()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContinentViewHolder {
         val binding = ItemRvContinentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ContinentViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ContinentViewHolder, position: Int) {
-        holder.bindContinentItem(getItem(position))
+        holder.bindContinentItem(getItem(position)) { continentCode ->
+            onclick(continentCode)
+        }
     }
 }
 
 
-class ContinentDiffer(): DiffUtil.ItemCallback<Continent> () {
+class ContinentDiffer : DiffUtil.ItemCallback<Continent> () {
     override fun areItemsTheSame(oldItem: Continent, newItem: Continent): Boolean {
         return oldItem == newItem
     }

@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.judahben149.countrycookbook.R
 import com.judahben149.countrycookbook.databinding.FragmentContinentBinding
+import com.judahben149.countrycookbook.utils.CONTINENT_CODE
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +19,9 @@ class ContinentFragment : Fragment() {
 
     private var _binding: FragmentContinentBinding? = null
     private val binding get() = _binding!!
+    private val navController by lazy {
+        findNavController()
+    }
 
     private val viewModel: ContinentViewModel by viewModels()
     private var adapter: ContinentAdapter? = null
@@ -42,7 +48,12 @@ class ContinentFragment : Fragment() {
 
     private fun setupAdapter() {
         continentRecyclerView = binding.rvContinents
-        adapter = ContinentAdapter()
+        adapter = ContinentAdapter() { continentCode ->
+            val bundle = Bundle().apply {
+                this.putString(CONTINENT_CODE, continentCode)
+            }
+            navController.navigate(R.id.action_continentFragment_to_countriesFragment, bundle)
+        }
         continentRecyclerView.adapter = adapter
 
     }

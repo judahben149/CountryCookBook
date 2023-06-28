@@ -6,7 +6,10 @@ import com.judahben149.countrycookbook.domain.model.Continent
 
 class ContinentViewHolder(private val binding: ItemRvContinentBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bindContinentItem(continent: Continent) {
+    fun bindContinentItem(continent: Continent, onclick:(continentCode: String) -> Unit) {
         binding.tvContinentName.text = continent.name
+        binding.itemContinent.setOnClickListener {
+            onclick(continent.id)
+        }
     }
 }
