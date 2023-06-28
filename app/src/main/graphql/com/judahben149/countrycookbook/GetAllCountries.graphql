@@ -5,6 +5,7 @@ query GetAllCountries($continentCode: ID!) {
         countries {
             code
             name
+            capital
             emoji
         }
     }
