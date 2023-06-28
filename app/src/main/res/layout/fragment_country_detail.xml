@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.countryDetail.CountryDetailFragment">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        android:fitsSystemWindows="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_tool_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/iv_backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_flag"-->
+<!--        android:layout_width="72dp"-->
+<!--        android:layout_height="72dp"-->
+<!--        app:layout_constraintStart_toStartOf="@id/iv_backdrop"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/iv_backdrop"-->
+<!--        android:layout_marginStart="64dp"-->
+<!--        android:layout_marginTop="-36dp"-->
+<!--        />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_country_name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toEndOf="@id/iv_flag"-->
+<!--        app:layout_constraintTop_toTopOf="@id/iv_flag"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/iv_flag"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        tools:text="Nigeria"-->
+<!--        android:textSize="30sp"-->
+<!--        />-->
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp" >
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

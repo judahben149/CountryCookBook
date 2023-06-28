@@ -9,5 +9,23 @@
         android:id="@+id/continentFragment"
         android:name="com.judahben149.countrycookbook.presentation.continent.ContinentFragment"
         android:label="fragment_continent"
-        tools:layout="@layout/fragment_continent" />
+        tools:layout="@layout/fragment_continent" >
+        <action
+            android:id="@+id/action_continentFragment_to_countriesFragment"
+            app:destination="@id/countriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countriesFragment"
+        android:name="com.judahben149.countrycookbook.presentation.countryList.CountriesFragment"
+        android:label="fragment_countries"
+        tools:layout="@layout/fragment_countries" >
+        <action
+            android:id="@+id/action_countriesFragment_to_countryDetailFragment"
+            app:destination="@id/countryDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryDetailFragment"
+        android:name="com.judahben149.countrycookbook.presentation.countryDetail.CountryDetailFragment"
+        android:label="fragment_country_detail"
+        tools:layout="@layout/fragment_country_detail" />
 </navigation>
