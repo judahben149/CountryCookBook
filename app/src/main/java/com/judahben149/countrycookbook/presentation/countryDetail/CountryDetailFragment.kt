@@ -44,10 +44,30 @@ class CountryDetailFragment : Fragment() {
     }
 
     private fun bindUI(state: CountryDetailState) {
-        binding.collapsingToolBarLayout.title = state.country.name
+//        binding.collapsingToolBarLayout.title = state.country.name
         val flag = state.country.flag.getEmojiDrawable(requireContext())
 //        binding.ivFlag.setImageDrawable(flag)
-//        binding.ivBackdrop.setImageDrawable(flag)
+        binding.ivFlag.setImageDrawable(flag)
+
+        var stateList = ""
+        var subdivisionList = ""
+
+        state.country.states.forEach {
+            stateList += "${it.name},\n"
+        }
+        state.country.subdivisions.forEach {
+            stateList += "${it.name},\n"
+        }
+
+        //messy messy code I know. Just for display purposes
+        binding.tvCountryDetails.text = ("Capital: ${state.country.capital}\n"
+                + "Country code: ${state.country.phoneCode}\n"
+                + "Currencies: ${state.country.currencies}\n"
+                + "Languages: ${state.country.languageList}\n"
+                + "Subdivisions: ${subdivisionList}\n"
+                + "States: ${state.country.states.size}\n"
+                + "List of states:\n"
+                + stateList)
 
         val palette = createPalette(flag)
 
@@ -55,11 +75,11 @@ class CountryDetailFragment : Fragment() {
             mutedSwatch?.let {
                 binding.background.apply {
                     setBackgroundColor(it.rgb)
-                    alpha = 0.4f
+//                    alpha = 0.15f
                 }
             }
             vibrantSwatch?.let {
-                binding.collapsingToolBarLayout.setBackgroundColor(it.rgb)
+//                binding.collapsingToolBarLayout.setBackgroundColor(it.rgb)
             }
         }
     }
