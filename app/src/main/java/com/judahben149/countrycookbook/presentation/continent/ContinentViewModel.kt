@@ -12,19 +12,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ContinentViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel() {
+class ContinentViewModel @Inject constructor(private val mainRepository: MainRepository) :
+    ViewModel() {
 
-    private val _continentList: MutableStateFlow<ContinentListUIState> = MutableStateFlow(ContinentListUIState())
+    private val _continentList: MutableStateFlow<ContinentListUIState> =
+        MutableStateFlow(ContinentListUIState())
     val continentList: StateFlow<ContinentListUIState> = _continentList.asStateFlow()
-
-    init {
-        getContinentList()
-    }
 
     fun getContinentList() {
         isLoading()
         viewModelScope.launch {
-            _continentList.update { it.copy(continentList = mainRepository.getContinentList(), isLoaded = true) }
+            _continentList.update {
+                it.copy(
+                    continentList = mainRepository.getContinentList(),
+                    isLoaded = true
+                )
+            }
         }
     }
 
