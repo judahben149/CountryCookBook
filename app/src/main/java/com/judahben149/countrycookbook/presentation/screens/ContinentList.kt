@@ -2,7 +2,7 @@ package com.judahben149.countrycookbook.presentation.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
 fun ContinentListScreen() {
 
     val viewModel = viewModel<ContinentViewModel>()
-    val state by viewModel.continentList.collectAsState()
+    val state by viewModel.uiState.collectAsState()
 
     LaunchedEffect(key1 = "continentCode") {
         withContext(Dispatchers.IO) {
@@ -30,26 +30,36 @@ fun ContinentListScreen() {
         }
     }
 
-    if (state.isLoading) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            LoadingProgress()
+    when (state) {
+        ContinentListUIState.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                LoadingProgress()
+            }
         }
-    } else if (state.isLoaded) {
-        ContinentListScreenContent(state = state, onClick = {
 
-        })
+        is ContinentListUIState.Loaded -> {
+            ContinentListScreenContent(state = state, onClick = {
+
+            })
+        }
+
+        is ContinentListUIState.Error -> {
+
+        }
     }
-
-
 }
 
 @Composable
 fun ContinentListScreenContent(state: ContinentListUIState, onClick: (id: String) -> Unit) {
-    LazyRow {
-        items(state.continentList.size) { itemIndex ->
+    val continentList = (state as ContinentListUIState.Loaded).continentList
+
+    LazyColumn {
+        items(
+            count = continentList.size
+        ) { itemIndex ->
             ItemContinent(
                 continent = state.continentList[itemIndex],
                 onItemClick = { onClick(state.continentList[itemIndex].id) })
