@@ -1,6 +1,8 @@
 package com.judahben149.countrycookbook.presentation.components
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,8 +18,12 @@ import com.judahben149.countrycookbook.domain.model.Continent
 @Composable
 fun ItemContinent(continent: Continent, onItemClick: (continentCode: String) -> Unit) {
 
+    Spacer(modifier = Modifier.height(8.dp))
+
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 6.dp),
         onClick = { onItemClick(continent.id) }
     ) {
 

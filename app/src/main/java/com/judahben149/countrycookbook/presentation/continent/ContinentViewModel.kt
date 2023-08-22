@@ -15,27 +15,21 @@ import javax.inject.Inject
 class ContinentViewModel @Inject constructor(private val mainRepository: MainRepository) :
     ViewModel() {
 
-    private val _continentList: MutableStateFlow<ContinentListUIState> =
-        MutableStateFlow(ContinentListUIState())
-    val continentList: StateFlow<ContinentListUIState> = _continentList.asStateFlow()
+    private val _uiState: MutableStateFlow<ContinentListUIState> = MutableStateFlow(ContinentListUIState.Loading)
+    val uiState: StateFlow<ContinentListUIState> = _uiState.asStateFlow()
 
     fun getContinentList() {
         isLoading()
         viewModelScope.launch {
-            _continentList.update {
-                it.copy(
-                    continentList = mainRepository.getContinentList(),
-                    isLoaded = true
-                )
-            }
+            _uiState.update { ContinentListUIState.Loaded(mainRepository.getContinentList()) }
         }
     }
 
     private fun isLoading() {
-        _continentList.update { it.copy(isLoading = true, isLoaded = false) }
+        _uiState.update { ContinentListUIState.Loading }
     }
 
     private fun handleErrorMessage(errorMessage: String) {
-        _continentList.update { it.copy(isError = true, errorMessage = errorMessage) }
+        _uiState.update { ContinentListUIState.Error(errorMessage) }
     }
 }
