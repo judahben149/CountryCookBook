@@ -13,10 +13,10 @@ import com.judahben149.countrycookbook.domain.model.Country
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemCountry(country: Country, onClick: (countryCode: String) -> Unit) {
+fun ItemCountry(country: Country, onItemClick: (countryCode: String) -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        onClick = { onClick(country.id) }
+        onClick = { onItemClick(country.id) }
     ) {
         Column(modifier = Modifier.align(Alignment.CenterHorizontally)) {
             Text(
