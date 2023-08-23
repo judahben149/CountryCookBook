@@ -22,8 +22,6 @@ import com.judahben149.countrycookbook.utils.returnContinentDrawable
 @Composable
 fun ItemContinent(continent: Continent, onItemClick: (continentCode: String) -> Unit) {
 
-    Spacer(modifier = Modifier.height(8.dp))
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
