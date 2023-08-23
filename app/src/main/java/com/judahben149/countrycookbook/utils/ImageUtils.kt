@@ -1,19 +1,17 @@
 package com.judahben149.countrycookbook.utils
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ImageSpan
-import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.text.HtmlCompat
 import androidx.palette.graphics.Palette
+import com.judahben149.countrycookbook.R
 
 fun createPalette(drawable: Drawable): Palette {
     val bitmap = drawable.toBitmap()
@@ -43,4 +41,17 @@ fun String.getEmojiDrawable(context: Context, alpha: Int = 255): BitmapDrawable 
     editedCanvas.drawBitmap(bitmap, 0f, 0f, paint)
 
     return BitmapDrawable(context.resources, editedBitmap)
+}
+
+fun String.returnContinentDrawable(): Int {
+    return when(this) {
+        "AF" -> R.drawable.img_africa
+        "AN" -> R.drawable.img_antartica
+        "AS" -> R.drawable.img_asia_other
+        "EU" -> R.drawable.img_europe
+        "NA" -> R.drawable.img_north_america
+        "OC" -> R.drawable.img_oceania
+        "SA" -> R.drawable.img_south_america
+        else -> R.drawable.img_africa
+    }
 }
