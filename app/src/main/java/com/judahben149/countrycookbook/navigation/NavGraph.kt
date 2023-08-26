@@ -1,14 +1,15 @@
 package com.judahben149.countrycookbook.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.judahben149.countrycookbook.presentation.countryList.CountryListScreen
 import com.judahben149.countrycookbook.presentation.screens.ContinentListScreen
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph() {
+    val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Screen.ContinentListScreen.route) {
 
@@ -23,5 +24,7 @@ fun NavGraph(navController: NavHostController) {
                 CountryListScreen(navController = navController, continentId = id)
             }
         }
+
+
     }
 }
