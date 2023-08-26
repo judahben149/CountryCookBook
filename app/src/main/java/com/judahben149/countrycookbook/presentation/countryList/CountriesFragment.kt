@@ -41,9 +41,9 @@ class CountriesFragment : Fragment() {
         val continentCode = arguments?.getString(CONTINENT_CODE)
 
         setupAdapter()
-        viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            adapter?.submitList(state.countryList)
-        }
+//        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+//            adapter?.submitList(state.countryList)
+//        }
 
         continentCode?.let {
             viewModel.getContinentDetails(it)
