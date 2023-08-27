@@ -2,6 +2,7 @@ package com.judahben149.countrycookbook.presentation.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -13,11 +14,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.judahben149.countrycookbook.navigation.Screen
 import com.judahben149.countrycookbook.presentation.components.ItemContinent
 import com.judahben149.countrycookbook.presentation.components.LoadingProgressFilledScreen
+import com.judahben149.countrycookbook.presentation.components.TopAppBarComponent
 import com.judahben149.countrycookbook.presentation.continent.ContinentListUIState
 import com.judahben149.countrycookbook.presentation.continent.ContinentViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,36 +28,46 @@ import kotlinx.coroutines.withContext
 @Composable
 fun ContinentListScreen(navController: NavHostController) {
 
-    val viewModel = viewModel<ContinentViewModel>()
+    val viewModel: ContinentViewModel = hiltViewModel()
     val state by viewModel.uiState.collectAsState()
 
-    LaunchedEffect(key1 = "continentCode") {
+    LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             viewModel.getContinentList()
         }
     }
 
-    when (state) {
-        ContinentListUIState.Loading -> {
-            LoadingProgressFilledScreen()
-        }
+    Column(modifier = Modifier.fillMaxSize()) {
 
-        is ContinentListUIState.Loaded -> {
-            ContinentListScreenContent(
-                state = state,
-                onClick = { continentId ->
-                    navController.navigate(
-                        Screen.CountryListScreen.route.replace(
-                            "{continentId}",
-                            "${continentId}"
+        TopAppBarComponent(
+            title = "Continents",
+            isHomeDestination = true,
+            shouldCollapse = false,
+            onNavIconClick = { navController.popBackStack() }
+        )
+
+        when (state) {
+            ContinentListUIState.Loading -> {
+                LoadingProgressFilledScreen()
+            }
+
+            is ContinentListUIState.Loaded -> {
+                ContinentListScreenContent(
+                    state = state,
+                    onClick = { continentId ->
+                        navController.navigate(
+                            Screen.CountryListScreen.route.replace(
+                                "{continentId}",
+                                "${continentId}"
+                            )
                         )
-                    )
-                }
-            )
-        }
+                    }
+                )
+            }
 
-        is ContinentListUIState.Error -> {
+            is ContinentListUIState.Error -> {
 
+            }
         }
     }
 }
