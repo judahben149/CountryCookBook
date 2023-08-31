@@ -3,6 +3,7 @@ CountryCookBook is a demo project which fetches and displays country details fro
 
 ### Tools used include:
 * Kotlin
+* Jetpack Compose
 * Navigation Component
 * Dagger-Hilt
 * Apollo GraphQL client
